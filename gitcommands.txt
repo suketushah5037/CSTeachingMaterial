@@ -1,0 +1,5 @@
+first time do a git clone of the new repo you created by logging into github on the UI
+git clone https://github.com/sahirvsahirv/CSTeachingMaterial
+git add .
+git commit -m "commit"
+git push
