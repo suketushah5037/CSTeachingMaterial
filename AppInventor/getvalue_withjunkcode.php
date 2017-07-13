@@ -9,7 +9,7 @@ header("Content-Type: text/json;");
 function check_isbn($isbn)
 {
     /*Key received by logging in into the isbn website for API
-    #Visit this link for creating a key to use the API
+    #Visit this link for creatig a key to use the API
     #http://isbndb.com/account/logincreate
     #URL format:  http://isbndb.com/api/v2/json/D6ONXMNB/book/9780131988132*/
 
@@ -44,15 +44,11 @@ function check_isbn($isbn)
 
     #Close it
     curl_close($curl);
-    
-    #The JSON data
     #echo $curlData;
     $json = json_decode($curlData,true);
-    
     #cant echo a json directly
     #echo $json;
-    
-    #Scrape the author's name
+  
     $author_name = "";
     foreach($json['data']['0']['author_data'] as $data)
     {
@@ -67,52 +63,81 @@ function check_isbn($isbn)
 
 
 #Converts json data to a php string
+#$tag = "["VALUE", "isbn", "9780131988132"]";
 #http://192.168.1.16/getvalue?tag=isbn
 
 #Passed via HTTP Post from App Inventor
-#when it comes from the URL use $_GET
-#This is used for testing purposes to test the URL on the browser using http://192.168.1.7/getvalue?tag=isbn
+#$tag = $_POST['tag'];
+#echo $tag;
+
+
+#when it comes from the URL
 $tag = $_POST['tag'];
 
 $value = '';
-#tag = author - sent from AppInventor
+#tag = author
 if($tag)
 {
     #get key and value from a file stored on the web server
-    #The file has just the isbn number stored without quottes using setvalue
-    
     $value = file_get_contents('isbnval.txt');
-    
+    #$arr = array("VALUE",$tag, $value );
+    #echo $_SESSION;
+    #echo $value;
 }
+#["VALUE","tag","\"\"9780131988132\"\""] - contents of the file
+#$messageType = json_decode($value);
+#pick up the isbn number from the array
+#pick the isbn number
+#$isbn_number =  $messageType[2];
+#echo $isbn_number;
+#visit the webpage and scrape the content
 
-#Pass the isbn number to parse the json data and just get the author's name
+#$xml = check_isbn($isbn_number);
 $xml = check_isbn($value);
 #echo $xml;
-
 #make it an array with tag "VALUE" as required by APPInventor, key "author" and value as the author's name received from check_isbn function
-#app inventor code does not loop for array items, hence use the format for a single item - ok on the browser since it is an echo
-#Required format
-#["VALUE", "firstName", "\"Lewis\""]
-#["VALUE", "contacts", ["Lewis Moten", "John Smith", "Jane Doe"]]
+#$resultData = array("VALUE","author",array($xml));
+#app inventor is not able to parse an array for a single item returned - ok on the broswer since it is an echo
 
-#add single quotes to the author's name and send as is - without this the json format is not acheived 
+#["VALUE", "firstName", "\"Lewis\""]
+
+#escape slash
+#$addslash = "\\";
+#echo $addslash;
+#$addquoteswithslash = $addslash."\"";
+$addquotes = "\"";
+#echo $addquoteswithslash;
+#$valuetext = $addquotes.$xml.$addquotes;
 $valuetext = "'".$xml."'";
 #echo $valuetext;
 
-#Send it as an array
 $resultData = array("VALUE","author", $valuetext);
 #echo $resultData;
-
 #encode it in JSON
 $resultDataJSON = json_encode($resultData);
 
-#HARDCODED for testing bugs
 #echo it, to retreive the contents - hardcoded
 #$resultData = array("VALUE","author",array('peter'));
 #$resultDataJSON = json_encode($resultData);
 
-#THE RESULT
 echo $resultDataJSON;
 
+#now appinventor's TinyWebDB1.GotValue, valuefromWEBDB will have the author's name 
+//echo $xml;
+
+#$resultData = array("VALUE","tag",array('peter'));
+#["VALUE","author",["peter"]]
+#$resultDataJSON = json_encode($resultData);
+
+
+#echo $resultDataJSON;
+#["VALUE","tag","peter"]
+#["VALUE","\"tag\"","peter "]
+#value <br of type java.lang.string cannot be converted to jsonarray
+#echo json_encode("hello");
+
+
+#["VALUE", "contacts", ["Lewis Moten", "John Smith", "Jane Doe"]]
+#["VALUE","author",["Decker, Rick"]]
 ?>
 
