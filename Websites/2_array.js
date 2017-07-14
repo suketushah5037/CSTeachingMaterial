@@ -1,6 +1,6 @@
 var library = ["Habits", "what if", "winnie the pooh"]
 
-library
+library;
 
 var newlibrary = [];
 //Populate the next through the loop asking the user

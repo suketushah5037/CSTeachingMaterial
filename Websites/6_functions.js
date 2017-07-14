@@ -8,13 +8,19 @@ var rollcaller = function(noofstudents)
 	{
 		console.log("Hi! " + rollcall + " is very much here.")
 	}
-}
+	return 1;
+};
 
 //15 = noofstudents and is a parameter
 rollcaller(15);
+//returns 1
+//logs 1 from the return value
+console.log(rollcaller(15));
+
 
 //rollcaller function call does not return everything hence it is undefined
 
+//return early to break execution and use multiple returns in if conditions to return different values based on the flow
 
 //return value could be used to add something like Math.random()*10
 //function with early return - when some conditions fail and you want to

@@ -1,6 +1,6 @@
 Algorithm
 -------------
-Pick	a	random	word. 
+Pick	a	random	word from a small user defined dictionary
 Take	the	player’s	guess. 
 Quit	the	game	if	the	player	wants	to. 
 Check	that	the	player’s	guess	is	a	valid	letter. Keep	track	of	letters	the	player	has	guessed. 
