@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 #importing a package buit by you
-import Board
+#import Board
 
 #imports flask and creates a new website in a new variable called "app"
 #app is the WSGI application
@@ -17,10 +17,19 @@ msBoard = MineSweeperInitializer()
 #now need to show it on the UI - move it to WebBoard - to generate HTML
 #this is required before rendering
 
+height = msBoard.board.height 
 #@ decorator for function definitions, if the app requests (/minesweeper) on the browser, route to hhomepage
 @app.route('/Minesweeper')
 def homepage():
-    return render_template('minesweeper.html', msB = msBoard)
+##    templatedict = {
+##        'width': msBoard.board.width,
+##        'height': msBoard.board.height,
+##        'array': msBoard.board.zoneArr
+##        }
+
+    
+    return render_template('minesweeper.html', h = height)
+
     #return "Hello world"
 
 

@@ -27,8 +27,17 @@ class Board:
         #Two dimensional array of Zones using list comprehension
         self.zoneArr = [[Zone.Zone() for i in range(self.width)] for j in range(self.height)]
         
+    #need getters to access width, height and zoneArr outside the class
+    #cannot set it without a setter and hence it is safe
+    def getWidth(self):
+        return self.width;
 
-        
+    def getHeight(self):
+        return self.height;
+
+    def getboardArr(self):
+        return self.zoneArr
+    
     
     
     

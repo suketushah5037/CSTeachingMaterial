@@ -6,7 +6,8 @@ class MineSweeperInitializer:
 
     def __init__(self):
         #instantiating board object
-        board = WebBoard()
+        #don't miss the self. here,else it is a normal variable not an instance
+        self.board = WebBoard()
         
         #initialize zone array with 10 random mine positions
         #[i][j] make a mine position
@@ -15,5 +16,14 @@ class MineSweeperInitializer:
         for mineposition in range(10):
             randomnumberi = random.randrange(0, 8)
             randomnumberj = random.randrange(0, 8)
-            board.zoneArr[randomnumberi][randomnumberj].isAMine = True
-        
+            self.board.zoneArr[randomnumberi][randomnumberj].isAMine = True
+
+    #dont forget to mention self as the first parameter even if there are none
+    def getBoard(self):
+        return self.board    
+
+    
+
+#For testing, move it to a unit test       
+#msBoard = MineSweeperInitializer()
+#print(  msBoard.getBoard().getWidth() )
