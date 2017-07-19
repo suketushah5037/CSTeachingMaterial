@@ -12,9 +12,16 @@
    <ul id="msB">
        <li>{{dict.width}}</li>
        <li>{{dict.height}}</li>
-       <li>{{dict.isAMine}}</li>
+       
    </ul>
-
+   <!--Now have data from server side coming to client side through jinja in flask
+        Need to handle most of the logic client side
+        Use server side to only host the app on the web
+        later for multi player store it in a databae and pick current status
+        -->
+    
+    <!--Working code-gets all the item in the 2-Darray that are mines-->
+    <!--
    <table>
     {% for i in range(dict.width) %}
         {% for j in range(dict.height) %}
@@ -27,8 +34,24 @@
         {% endfor %}
     {% endfor %}
     </table>
-    
+    -->
+    <!--slash - as in urls,not the slash on the windows path and relative path from the root folder-->
+    <table id="gamestate" onmouseup="return false">
+        <tr>
+            <td colspan={{dict.width}}>
+                <div id="mines">10</div>
+                <div id="timer">60</div>
+                <img id="smiley" src="images/bored.gif" alt ="restart" onmousedown="return clickSmiley(event)">
+            </td>
+        </tr>
 
+        
+            </td>
+        
+        </tr>
+    
+    </table>
+    
     </body>
 </html>
 
