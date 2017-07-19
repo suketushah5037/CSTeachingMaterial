@@ -10,12 +10,24 @@
    </ol>
    <!--Testing jinja templating-->
    <ul id="msB">
-       <li>{{h}}</li>
-    
-  
-
-
+       <li>{{dict.width}}</li>
+       <li>{{dict.height}}</li>
+       <li>{{dict.isAMine}}</li>
    </ul>
+
+   <table>
+    {% for i in range(dict.width) %}
+        {% for j in range(dict.height) %}
+            
+            <tr>
+                {{i}}
+                {{j}}
+                {{dict.array[i][j].isAMine}}
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </table>
+    
 
     </body>
 </html>

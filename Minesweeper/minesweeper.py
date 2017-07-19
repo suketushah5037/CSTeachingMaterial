@@ -17,19 +17,21 @@ msBoard = MineSweeperInitializer()
 #now need to show it on the UI - move it to WebBoard - to generate HTML
 #this is required before rendering
 
-height = msBoard.board.height 
+ 
 #@ decorator for function definitions, if the app requests (/minesweeper) on the browser, route to hhomepage
 @app.route('/Minesweeper')
 def homepage():
-##    templatedict = {
-##        'width': msBoard.board.width,
-##        'height': msBoard.board.height,
-##        'array': msBoard.board.zoneArr
-##        }
+    templatedict = {
+        'width': msBoard.board.width,
+        'height': msBoard.board.height,
+        #'isAMine': msBoard.board.zoneArr[5][5].isAMine,
+        'array': msBoard.board.zoneArr
+        }
 
     
-    return render_template('minesweeper.html', h = height)
-
+    return render_template('minesweeper.html', dict = templatedict)
+    #This can be done for multi-player games to fetch code from the server
+    #else do it on client side js only
     #return "Hello world"
 
 
