@@ -2,17 +2,20 @@
 #The UI uses the Board to display
 import Zone
 
-DEFAULTWIDTH = 8
-DEFAULTHEIGHT = 8
-DEFAULTNOOFMINES = 10
+##DEFAULTWIDTH = 8
+##DEFAULTHEIGHT = 8
+##DEFAULTNOOFMINES = 10
 
 
 class Board:
-    width = DEFAULTWIDTH
-    height = DEFAULTHEIGHT
-    noofmines = DEFAULTNOOFMINES
-    noofminesleft = DEFAULTNOOFMINES
-    zoneArr = [[Zone.Zone() for i in range(DEFAULTWIDTH)] for j in range(DEFAULTHEIGHT)]
+    #initializing is important - these are static elements
+    #We do not want static elements, hence commenting it out
+    
+    #width = DEFAULTWIDTH
+    #height = DEFAULTHEIGHT
+    #noofmines = DEFAULTNOOFMINES
+    #noofminesleft = DEFAULTNOOFMINES
+    #zoneArr = [[Zone.Zone() for i in range(DEFAULTWIDTH)] for j in range(DEFAULTHEIGHT)]
 
     #constructor
     def __init__(self, width, height, noofmines):
@@ -25,3 +28,7 @@ class Board:
         self.zoneArr = [[Zone.Zone() for i in range(self.width)] for j in range(self.height)]
         
 
+        
+    
+    
+    

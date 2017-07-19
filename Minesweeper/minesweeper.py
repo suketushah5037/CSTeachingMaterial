@@ -7,10 +7,20 @@ import Board
 #Started as an app __name__ = __main__ else name of the module, so that it can find the template/static folder
 app = Flask(__name__)
 
+#generate the html table needed for the UI using jinja templating
+
+from MineSweeperInitializer import MineSweeperInitializer
+
+#Created a minesweeper WebBoard
+msBoard = MineSweeperInitializer()
+
+#now need to show it on the UI - move it to WebBoard - to generate HTML
+#this is required before rendering
+
 #@ decorator for function definitions, if the app requests (/minesweeper) on the browser, route to hhomepage
 @app.route('/Minesweeper')
 def homepage():
-    return render_template('minesweeper.html', name = "minesweepergame")
+    return render_template('minesweeper.html', msB = msBoard)
     #return "Hello world"
 
 
@@ -30,9 +40,5 @@ if __name__ == "__main__":
 
 #static folder has all the bootstrap files and template folder has the html
 
-#generate the html table needed for the UI using jinja templating
 
 
-
-
-    

@@ -3,8 +3,12 @@
     
     
 class Zone:
-    isAMine = False
-    revealedOrNot = False
-    hasNeighbouringMines = False
-    isSuspectedMine = False
-    noOfNeighbouringMines = 0
+    def __init__(self):
+        isAMine = False
+        revealedOrNot = False
+        hasNeighbouringMines = False
+        isSuspectedMine = False
+        noOfNeighbouringMines = 0    
+    
+        
+        
