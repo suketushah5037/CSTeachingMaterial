@@ -45,13 +45,13 @@ server = smtplib.SMTP('smtp.googlemail.com',465)
 #secure connection and login
 server.ehlo()
 server.starttls()
-server.login("gowri.r@gmail.com", "sahanakumar")
+server.login("myemail@gmail.com", "mypwd")
 
 #print(socket.gethostbyname(socket.gethostname()))
 msg = s.getsockname()[0] #socket.gethostbyname(socket.gethostname());
 
 #send mail and quit
-server.sendmail("gowr.i@gmail.com", "gowri.r@gmail.com", msg);
+server.sendmail("myemail@gmail.com", "myemail@gmail.com", msg);
 print("sent email")
 server.quit();
 
