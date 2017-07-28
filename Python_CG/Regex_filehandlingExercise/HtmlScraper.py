@@ -9,7 +9,7 @@ import re
 
 #open the file
 #modes: r, w, a, r+
-babynames_1990 = open("C:\\Users\\Gowri\\Desktop\\CG\\Python_Course\\google-python-exercises\\babynames\\baby1990.html", "r")
+babynames_1990 = open("baby1990.html", "r")
 
 #reads the entire file
 # - read and readline available
@@ -26,6 +26,7 @@ regExMatches = re.search('Popularity\sin\s(\d{4})', data)
 #Grouping
 print(regExMatches.group(1))
 
+#Match the year , boy's name and girl's name
 #* is 0 or more, ? is 0 or 1, and + is 1 or more
 #findall to find all the matches
 regExMatches = re.findall('<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', data)
@@ -64,6 +65,7 @@ babynames_1990.close()
 ##print(newlist[2])
 ##print(newlist[3])
 
+#sorting a dictionary by 'name'
 def getName(element):
     return element['name']
 

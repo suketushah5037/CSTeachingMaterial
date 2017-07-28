@@ -6,10 +6,13 @@
 
 list = []
 
+#usual method
 for i in range(100):
     list.append(i)
 #print(list)
 
+
+#List comprehension method
 #i*i = output
 #i = the variable
 #range(100) = input set
@@ -19,6 +22,7 @@ list = [ i*i for i in range(100)]
 squareslist = []
 mylist = [1,2,3,4]
 
+#another example
 for i in mylist:
     squareslist.append(i*i)
 
@@ -31,7 +35,7 @@ newsquares = [i*i for i in [1,2,3,4]]
 ifcondsquares = [i*i for i in range(10) if (i%2 == 0)]
 #print(ifcondsquares)
 
-
+#nested loop usual method
 nestedloop = []
 nestedloop2 = []
 loop1 = [1,2]
@@ -45,14 +49,14 @@ for i in loop1:
 #print(nestedloop)
 #print(nestedloop2)
 
-
+#Neste loop using list comprehensions
 cnestedloop = [[i,j] for i in loop1 for j in loop2]
 cnestedloop2 = [(i,j) for i in loop1 for j in loop2]
 
 print(cnestedloop)
 print(cnestedloop2)
 
-#Exercise
+#Exercise - do the same as "zip" does using list comprehensions
 zippedlist = [i for i in zip([1, 2], ["a", "b"])]
 print(zippedlist)
 

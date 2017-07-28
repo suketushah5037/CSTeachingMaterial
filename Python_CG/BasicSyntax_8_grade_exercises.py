@@ -163,6 +163,7 @@ print("\n")
 #-------------------------------------------------
 
 #Exercises
+#Simple:Accept a sentence and print the number of letters and digits in the sentence
 #1. Print multiplication tables of one chosen number (9 times table)
 #2. Print multiplication tables of all the numbers from 1-12 
 #3. Once done, take the inputs 1 and 12 from the user. Hence can be 20-30 time tables too
