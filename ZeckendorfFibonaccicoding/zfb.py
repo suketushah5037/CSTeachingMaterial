@@ -12,13 +12,16 @@ def nearestSmallerEqFib(n):
 	# Finds the greatest Fibonacci Number smaller
 	# than n.
 	f1,f2,f3 = 0,1,1
-	print("f1", "f2", "f3")
-	print(f1, f2, f3)
+	#print("f1", "f2", "f3")
+	#print(f1, f2, f3)
+	#till the last number does not go above the number required to be split
+	#for 24 - 21 in the first case and 3 in the next case
 	while (f3 <= n):
 		f1 = f2;
 		f2 = f3;
 		f3 = f1+f2;
-		print(f1, f2, f3)
+		#print(f1, f2, f3)
+	#returns 21 the first time and 3 the next
 	return f2;
 
 
@@ -35,7 +38,7 @@ def printFibRepresntation(n):
 		# Print the found fibonacci number
 		print(f)
 
-		# Reduce n
+		# Reduce n, 24-21 = 3, send 3 for split
 		n = n-f
 
 # Driver code test above functions
