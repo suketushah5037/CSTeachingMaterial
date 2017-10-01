@@ -1,12 +1,3 @@
-#FSM for math expressions - to check the grammar
-#Convert to infix to  disallow precendence
-
-#Play FSM game first and then evaluate FSM for math expressions and
-#convert it into pseudo code/code
-#calculate - evaluate on the fly
-
-#Introduction on EBNF
-
 
 #Do not consider unary operators or decimals
 #Check if balanced or not initially
@@ -40,7 +31,7 @@ mathexpr = ((55)+3)*300/44+(6*9)-714/453
 Token class - to denote each token
 The lexer's get next token returns a token
 """
-INTEGER, MUL,DIV, ADD, SUB, EOF = 'INTEGER', 'MUL', 'DIV', 'ADD', 'SUB', 'EOF'
+INTEGER, MUL,DIV, ADD, SUB, EOF = 'INTEGER', 'MUL', 'DIV', 'PLUS', 'MINUS', 'EOF'
 
 class Token(object):
     def __init__(self, type, value):
@@ -120,15 +111,28 @@ class Lexer:
                 return(Token(SUB, '-'))
             self.error()
         return(Token(EOF, None))
+
+"""Empty AST"""        
+class AST(object):
+    pass
+
+"""Represents a Number, inherting from AST"""
+class Num(AST):
+    def __init__(self, token):
+        self.token = token
+        self.value = self.token.value
+
+
+"""BinOP node: Represents a binary operation, with a left and right node"""
+class BinOp(AST):
+    def __init__(self, left, op, right):
+        self.left = left
+        self.token = self.op = op
+        self.right = right
+
         
-"""
-Evaluates the expression
-"""
-class Interpreter(object):
-    """
-    Constructor - holds the lexer and the current Token (not the current position in the
-    expression, like the Lexer). This is an abstraction over the Lexer
-    """
+"""Parser - Takes tokens and generates AST"""
+class Parser(object):
     def __init__(self, lexer):
         self.lexer = lexer
         self.current_token = self.lexer.get_next_token()
@@ -138,53 +142,94 @@ class Interpreter(object):
     def error(self):
         raise Exception('Invalid syntax')
 
-    """
-    eat up and move to the next token
-    """
+    """Eat up the current token and move to the next"""
     def eat(self, token_type):
         if(self.current_token.type == token_type):
             self.current_token = self.lexer.get_next_token()
         else:
             self.error()
 
-    """
-    Returns an integer factor
-    """
-    def intfactor(self):
-        token =  self.current_token
-        self.eat(INTEGER)
-        return(token.value)
+    def factor(self):
+        """ factor: INTEGER | LPAREN expr RPAREN"""
+        token = self.current_token
+        if(token.type == INTEGER):
+            self.eat(INTEGER)
+            return Num(token)
+        elif(token.type == LPAREN):
+            self.eat(LPAREN)
+            node = self.expr()
+            self.eat(RPAREN)
+            return node
 
-    
-    """
-    Evaluates the expression
-    expr  : factor ((MUL|DIV|ADD|SUB)factor)*
-    factor: INTEGER
-    """
-    def expr(self):
-        #Gets the integer value
-        ##        token =  self.current_token
-        ##        self.eat(INTEGER)
-        ##        result = token.value
-
-        #replacing this with self.intfactor
-        result = self.intfactor()
-
-        while(self.current_token.type in (MUL, DIV, ADD, SUB)):
+    def term(self):
+        """ term: factor((MUL|DIV) factor)* """
+        node = self.factor()
+        while(self.current_token.type in (MUL,DIV)):
             token = self.current_token
             if(token.type == MUL):
                 self.eat(MUL)
-                #get the next factor on the right hand side
-                ##              token = self.current_token
-                ##              self.eat(INTEGER)
-                ##              result2 = token.value
-                ##              result = result*result2
-                result = result * self.intfactor()
             elif(token.type == DIV):
-              self.eat(DIV)
-              result = result/self.intfactor()
-            #Exercise: Add addition and subtraction to this
-        return result
+                self.eat(DIV)
+            node = BinOp(left = node, op=token, right = self.factor())
+        return node
+
+    def expr(self):
+        """ expr: term ((PLUS|MINUS)term)*"""
+        node = self.term()
+
+        while(self.current_token.type in (ADD, SUB)):
+              token = self.current_token
+              if(token.type == ADD):
+                  self.eat(ADD)
+              elif(token.type == SUB):
+                  self.eat(SUB)
+              node = BinOp(left = node, op=token,right=self.term())
+        return node
+    def parse(self):
+         return self.expr()
+
+
+class NodeVisitor(object):
+    def visit(self, node):
+        method_name = 'visit_' + type(node).__name__
+        visitor = getattr(self, method_name, self.generic_visit)
+        return visitor(node)
+
+    def generic_visit(self, node):
+        raise Exception('No visit_{} method'.format(type(node).__name__))
+    
+"""
+Evaluates the expression, traverses through the parse tree and evaluates the expression
+"""
+class Interpreter(NodeVisitor):
+    """
+    Constructor - holds the lexer and the current Token (not the current position in the
+    expression, like the Lexer). This is an abstraction over the Lexer
+    """
+    def __init__(self, parser):
+        self.parser = parser
+
+    """
+    Error condition
+    """
+    def error(self):
+        raise Exception('Invalid syntax')
+
+    def visit_BinOp(self, node):
+              if(node.op.type == ADD):
+                  return self.visit(node.left)+self.visit(node.right)
+              elif(node.op.type == SUB):
+                  return self.visit(node.left)-self.visit(node.right)
+              elif(node.op.type == MUL):
+                  return self.visit(node.left)*self.visit(node.right)
+              elif(node.op.type == DIV):
+                  return self.visit(node.left)/self.visit(node.right)
+    def visit_Num(self, node):
+              return node.value
+
+    def interpret(self):
+              tree=self.parser.parse()
+              return self.visit(tree)
 
 """
 Main driver
@@ -203,11 +248,11 @@ def main():
         if not text:
             continue
         lexer = Lexer(text)
-        interpreter = Interpreter(lexer)
-        result = interpreter.expr()
+        parser = Parser(lexer)
+        interpreter = Interpreter(parser)
+        result = interpreter.interpret()
         print(result)
 
 if(__name__ == '__main__'):
     main()
-                          
-        
+             
