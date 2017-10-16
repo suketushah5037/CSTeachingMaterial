@@ -1,6 +1,6 @@
 import Lexer
 import Token
-
+from graphviz import Source
     
 #Add it to a tree
 class AST(object):
@@ -173,6 +173,68 @@ def inorder(tree):
         inorder(tree.right)
 
 
+
+import textwrap
+
+dot_header = [textwrap.dedent("""\
+        digraph astgraph {
+          node [shape=circle, fontsize=12, fontname="Courier", height=.1];
+          ranksep=.3;
+          edge [arrowsize=.5]
+        """)]
+
+""" inorder traversal"""
+def visitast(tree):
+    global ncount
+    global dot_body
+     
+    #numeric and leaf node
+    if((tree.left == None) and (tree.right == None)):
+        s = '  node{} [label="{}"]\n'.format(ncount, tree.opvalue)
+        dot_body.append(s)
+        tree._num = ncount
+        ncount += 1
+        print(tree.opvalue)
+        return
+        #visitast(tree)
+    #binop node
+    elif(tree.opvalue == Token.EOF):
+         return
+    else:
+        s = '  node{} [label="{}"]\n'.format(ncount, tree.opvalue)
+        print(tree.opvalue)
+        dot_body.append(s)
+        tree._num = ncount
+        ncount = ncount+ 1
+        visitast(tree.left)
+        visitast(tree.right)
+
+        for child_node in (tree.left, tree.right):
+            s = '  node{} -> node{}\n'.format(tree._num, child_node._num)
+            dot_body.append(s)
+
+#pip install graphviz on the command prompt
+#generating ast graph
+
+ncount = 1
+dot_body = []
+dot_footer = ['}']
+
+def gendot(tree):
+    global ncount
+    global dot_body
+    global dot_header
+    global dot_footer
+    visitast(tree)
+    return ''.join(dot_header + dot_body  + dot_footer)
+
+
+
+#bfs tree uses a queue and dfs uses a stack
+
+
+
+
         
 lexer = Lexer.Lexer("1*(2+3)/2")       
 myparser = Parser(lexer)
@@ -189,20 +251,65 @@ print("Inorder traversal")
 inorder(node)
 #print(myparser.evaluatemathExprTree(node))
 
+###################################################
+print("printing ast tree")
+content = gendot(node)
+print(content)
 
 
 
+print("printing abstract syntax tree")
+nodecount = 1
+dot_body = []
+dot_footer = ['}']
+
+def gendotbfs(tree):
+    global dot_header
+    global dot_body
+    global dot_footer
+    bfs(tree)
+    return(''.join(dot_header + dot_body + dot_footer))
+def bfs(tree):
+    global ncount
+    global dot_body
+    ncount = 1
+    queue = []
+    queue.append(tree)
+    s = '  node{} [label="{}"]\n'.format(ncount, tree.opvalue)
+    dot_body.append(s)
+    tree._num = ncount
+    ncount += 1
+
+    while queue:
+        tree = queue.pop(0)
+        #print("tree opvalue", tree.opvalue)
+        for child_node in (tree.left, tree.right):
+             if(child_node  == None):
+                 #numeric node 
+                 continue
+             #print("ncount and child node = ", ncount, child_node.opvalue)
+             s = '  node{} [label="{}"]\n'.format(ncount, child_node.opvalue)
+             #print(s)
+             dot_body.append(s)
+             child_node._num = ncount
+             ncount = ncount + 1
+             #print("node{} -> node{} ".format( tree._num,child_node._num))
+             s = '  node{} -> node{}\n'.format(tree._num,child_node._num)
+             #print(s)
+             dot_body.append(s)
+             queue.append(child_node)
 
 
+print("tree root node", node)
+content = gendotbfs(node)
+print(content)
 
+#install graphviz from here
+#download from http://www.graphviz.org/Download_windows.php and install
+#run http://www.graphviz.org/Download_windows.php
 
-
-
-
-
-
-
-
+#command to run
+#C:\Program Files (x86)\Graphviz2.38\bin>dot -Tpng -o "C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\CSAdvanced course\pyDS\tokenizer\parsetree.png" "C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\CSAdvanced course\pyDS\tokenizer\parsetree.dot"
 
 ##############################################################################
 #OLD CODE
