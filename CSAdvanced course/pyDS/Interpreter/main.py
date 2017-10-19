@@ -27,9 +27,19 @@ def main():
     lexer = Lexer.Lexer("1*(2+3)/2")
     myparser = Parser.Parser(lexer)
     visualizer = Visualise.Visualise(myparser)
-    print("printing ast tree")
-    content = visualizer.gendot()
+    print("printing ast tree by traversing depth first using pre and post order traversals")
+    content = visualizer.gendotdfs()
     print(content)
+
+
+    #Generate the objects again - None goes to my parser
+    lexer = Lexer.Lexer("1*(2+3)/2")
+    myparser = Parser.Parser(lexer)
+    visualizer = Visualise.Visualise(myparser)
+    print("printing ast tree by traversing breadth first without recursion")
+    content = visualizer.gendotbfs()
+    print(content)
+    
 if __name__ == '__main__':
     main()
 ###########################################Parser call happening here#######################################

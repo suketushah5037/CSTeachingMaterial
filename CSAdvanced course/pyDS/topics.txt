@@ -47,3 +47,6 @@ https://forums.ni.com/t5/Machine-Vision/OCR-Braille-reading/m-p/544662
 https://medium.com/musoc-2017-braille-ocr/project-braille-ocr-using-python-70daf01e075b
 
 http://www.ni.com/white-paper/6470/en/
+
+class and instance attributes
+https://www.python-course.eu/python3_class_and_instance_attributes.php
