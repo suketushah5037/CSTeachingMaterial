@@ -1,52 +1,36 @@
-1. OOP - Explain and make slides
-
+1. OOP - Explain concepts
 2. TDD an unit testing
-C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\UnitTesting
-C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CuriosityGym\TestDrivenDevelopment_UnitTesting
-
 3. Stack and paranthesis check example
-C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\CSAdvanced course\pyDS\stack_parancheck
-
-4. Explain call stack during recursion and plain function call.
-C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\Code_CallStackRolePlay
-
-Recursion and dynamic programming
-
-C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\Python_CG\DP_Pascal'sFib
+4. Explain call stack during recursion and plain function call. We will do the call stack activity.
+5.Recursion and dynamic programming and how call stack is used here.
 Start with fibonacci and factorial and stadium activity and go through all three implemntations of pascal's with dynamic programming
-
-5. Explain queues and usage verbally
+6. Explain queues and usage verbally
 Explain trees formed during recursion
-
-6.How does computer evaluate math expressions
+7.Pre, in and post order traversals and the shunting yard algorithm and evaluate math expressions and flaws doing it this way.
+8,9,10. How does computer evaluate math expressions
 FSM activity and BNF form and traffic light example
+Convert math expr to fsm and ebnf and to code
 
-convert math expr to fsm and ebnf and to code
+Write Lexer, Parser, Interpreter and Visualizer
 
-use trees to evaluate the math expression and stacks and queue
-
-this example gives enough practise
-dfs - in , post and pre - uses stacks and recursion
-bfs uses queues
-
-math exprr ->lexical analyser (splits tokens and advances tokens) -> 
-
-7. backtracking 8 queens 
-8.  hashing and anagrams
-9. graphs and word ladder
-huffman encoding
-10. Tries and word search and bloom filter
-
-nim ai, minmax
-http://www.ni.com/white-paper/6470/en/
-https://github.com/MUSoC/Braille-OCR/blob/master/braille_scan.jpg
+Concepts: Trees, stack, queue, pre, post and inorder and breadth first traversal
 
 
-https://github.com/MUSoC/Braille-OCR
-https://forums.ni.com/t5/Machine-Vision/OCR-Braille-reading/m-p/544662
-https://medium.com/musoc-2017-braille-ocr/project-braille-ocr-using-python-70daf01e075b
+Post this the plan:
+7. backtracking with multiple ways to solve the anagram and come to backtracking and hashing as examples.
 
-http://www.ni.com/white-paper/6470/en/
+Hashing - Bitcoins using Merkle puzzles and Backtracking - 8 queens as food for thought
 
+Concepts: 
+Order of algorithms for different solutions for anagram and how it gets better or worse
+Backtracking 
+Hashing
+
+8. Graphs and word ladder
+9. Huffman encoding
+10.Tries and word search and bloom filter
+11. AI 
+
+Nim and Tic tac toe
 class and instance attributes
 https://www.python-course.eu/python3_class_and_instance_attributes.php
