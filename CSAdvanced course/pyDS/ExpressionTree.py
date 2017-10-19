@@ -1,16 +1,14 @@
 #Where are stacks queues and trees used?
-
-
 mathexpr = "1+2*3-5/4"
-
-
 #Convert it into postfix
+#Unambiguous on how to evaluate it, no brackets are required to tell the precedence
+#This is  called the shunting yard algorithm or the Reverse Polish Notation
 mathexpr = "123*+54/-"
 
 #Tokens
 INTEGER, MUL,DIV, ADD, SUB, EOF = 'INTEGER', 'MUL', 'DIV', 'PLUS', 'MINUS', 'EOF'
 
-#Add it to a tree
+#Tree class
 class AST(object):
     pass
     
@@ -32,12 +30,16 @@ class NumNode(AST):
         #I do not have a token class as of now
         #self.value = self.token.value
 
-#Have the lexer create tokens and give out tokens
-#Have the parser create an expression tree
+"""Construct a tree using a stack and returns the top of the stack
 
-#assume it is postfix
-#tokenize and AST at the same place
+We are not considering the prcedence here and hence no FSM or EBNF being and
+recursive descent parser algorithm is being used
 
+It just takes the tokens and if a numeric node
+-It appends on to the stack - will not consider 55 as a numeric- no FSM that is why
+-It does not check for precedence, and any binary operator, it treats it as a
+tree node and adds it to the stack
+"""
 def constructTree(mathexpr):
     stack = []
     for char in mathexpr:
@@ -57,6 +59,8 @@ def constructTree(mathexpr):
     #the above math expresssion
     #print(stack[-1].left)
     return stack[-1]       
+
+#Three modes  of Depth first traversals
 
 #Inorder traversal
 def inorder(tree):
@@ -81,9 +85,8 @@ def postorder(tree):
         postorder(tree.left)
         postorder(tree.right)
         print(tree.opvalue)
-        
-#Evaluate expression
-#a postfix one
+
+"""Evaluates an expression - a postfix one (only)"""
 def evaluateMathExpr(mathexpr):
     value = 0
     stack = []
@@ -127,6 +130,8 @@ def printstack(stack):
     print(stackstr)
 
 #recursion and use a stack
+"""Evaluates a tree, by traversing through the tree
+Uses post order traversal and manipulates the stack, to get the final value"""
 def evaluatemathExprTree(tree):
     #Bug
     #stack = []
@@ -168,33 +173,29 @@ def evaluatemathExprTree(tree):
             printstack(stack)
     
             
-value = 0        
+value = 0
+print("Construct a tree using a stack and return top of the stack")
+print("We will see later, a stack is not needed here")
 tree = constructTree(mathexpr)
 print("Tree constructed")
-print("Evaluating with tree")
+print("Evaluating with tree using post order traversal")
 stack = []
 evaluatemathExprTree(tree)
 value = stack.pop()
 print("Evaluated value with tree is = ", value)
 
-#value = evaluateMathExpr(mathexpr)
-#print("Evaluated value is = ", value)
+print("Evaluate the expression, if given in postfix notation")
+value = evaluateMathExpr(mathexpr)
+print("Evaluated value is = ", value)
 
-
-#print(tree)
-#print(tree.left)
-#print(tree.right)
 
 #AST given inorder-pre and post order
-##print("Inorder tree")
-##inorder(tree)
-##print("Preorder tree")
-##preorder(tree)
-##print("Postorder tree")
-##postorder(tree)
-
-#parser - froming tokens
-
+print("Inorder tree")
+inorder(tree)
+print("Preorder tree")
+preorder(tree)
+print("Postorder tree")
+postorder(tree)
 
 #output
 #mathexpr = "123*+54/-"
@@ -215,17 +216,28 @@ print("Evaluated value with tree is = ", value)
 #Need a stack and a queue
 #Input is infix
 
+"""Convert infix expressions to post fix - Shunting yard algorithm. No recursion involved
+1. Numbers are added to the queue
+2. Opening Brackets to the stack
+3. Closing bracket - Till the opening bracket is found in the stack, pop the stack and add the tokens to the queue
+4. If binary operator - If the stack already has operators, that have higher or equal precedence, pop the higher precedence operator from
+the stack and add it to the queue,
+If not - put the current binary operator onto the stack
+"""
 def infixtopostfix():
     print("Converting infix to postfix")
     opstack = []
     evalqueue = []
     #infix to postfix - since usually expressions are infix
-    mathexpr = "1+2*3-5/4"
+    mathexpr = "(1+2)*3-5/4"
     #use regex to split into tokens?
     #check balanced paranthesis and proper syntax using stack and regex
 
     #changing infix to postfix
     for char in mathexpr:
+        print("Current operator")
+        print(char)
+        
         if( (char == '+') or (char == '-') or (char == '*') or (char == '/') ):
             i = len(opstack)-1
             while(i >= 0):
@@ -248,8 +260,15 @@ def infixtopostfix():
             #change it to token later
             evalqueue.append(char)
 
+        print("operator stack")
+        print(opstack)
+        print("Evaluation queue")
+        print(evalqueue)
+    print("At the end, pop all left over items from the stack and add it to the queue")
+    #pop '/' from stack 
     oper = opstack.pop()
     while(len(opstack) != 0):
+        #Do not add '(' to the stack
         evalqueue.append(oper)
         oper = opstack.pop()
         
@@ -260,4 +279,7 @@ infixtopostfix()
 #Convert it into postfix
 mathexpr = "123*+54/-"
 
+print("Evaluating the expression with the post fix arrived at")
 evaluateMathExpr(mathexpr)
+
+#How do you add the ability to handle multiple digits in an integer and precedence without converting it into postfix?
