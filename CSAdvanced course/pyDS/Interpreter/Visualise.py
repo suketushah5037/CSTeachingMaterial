@@ -38,6 +38,7 @@ class Visualise:
         #iam reusing but ncount could have just been a local variable
         self.ncount = 1
         queue = []
+        #Add it to the queue
         queue.append(tree)
         s = '  node{} [label="{}"]\n'.format(self.ncount, tree.opvalue)
         self.dot_body.append(s)

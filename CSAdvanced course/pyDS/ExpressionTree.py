@@ -1,9 +1,11 @@
 #Where are stacks queues and trees used?
-mathexpr = "1+2*3-5/4"
+#mathexpr = "1+2*3-5/4"
+
 #Convert it into postfix
 #Unambiguous on how to evaluate it, no brackets are required to tell the precedence
 #This is  called the shunting yard algorithm or the Reverse Polish Notation
 mathexpr = "123*+54/-"
+
 
 #Tokens
 INTEGER, MUL,DIV, ADD, SUB, EOF = 'INTEGER', 'MUL', 'DIV', 'PLUS', 'MINUS', 'EOF'
@@ -39,6 +41,9 @@ It just takes the tokens and if a numeric node
 -It appends on to the stack - will not consider 55 as a numeric- no FSM that is why
 -It does not check for precedence, and any binary operator, it treats it as a
 tree node and adds it to the stack
+
+#History - invented
+Only takes postfix expressions
 """
 def constructTree(mathexpr):
     stack = []
