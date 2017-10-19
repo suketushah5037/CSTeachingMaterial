@@ -215,6 +215,7 @@ print("Evaluated value with tree is = ", value)
 #Need a stack and a queue
 #Input is infix
 
+#called shunting yard or RPN algorithm
 def infixtopostfix():
     print("Converting infix to postfix")
     opstack = []

@@ -1,0 +1,49 @@
+1. OOP - Explain and make slides
+
+2. TDD an unit testing
+C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\UnitTesting
+C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CuriosityGym\TestDrivenDevelopment_UnitTesting
+
+3. Stack and paranthesis check example
+C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\CSAdvanced course\pyDS\stack_parancheck
+
+4. Explain call stack during recursion and plain function call.
+C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\Code_CallStackRolePlay
+
+Recursion and dynamic programming
+
+C:\Users\Gowri\Desktop\CS_classes\MaterialRepo\CSTeachingMaterial\Python_CG\DP_Pascal'sFib
+Start with fibonacci and factorial and stadium activity and go through all three implemntations of pascal's with dynamic programming
+
+5. Explain queues and usage verbally
+Explain trees formed during recursion
+
+6.How does computer evaluate math expressions
+FSM activity and BNF form and traffic light example
+
+convert math expr to fsm and ebnf and to code
+
+use trees to evaluate the math expression and stacks and queue
+
+this example gives enough practise
+dfs - in , post and pre - uses stacks and recursion
+bfs uses queues
+
+math exprr ->lexical analyser (splits tokens and advances tokens) -> 
+
+7. backtracking 8 queens 
+8.  hashing and anagrams
+9. graphs and word ladder
+huffman encoding
+10. Tries and word search and bloom filter
+
+nim ai, minmax
+http://www.ni.com/white-paper/6470/en/
+https://github.com/MUSoC/Braille-OCR/blob/master/braille_scan.jpg
+
+
+https://github.com/MUSoC/Braille-OCR
+https://forums.ni.com/t5/Machine-Vision/OCR-Braille-reading/m-p/544662
+https://medium.com/musoc-2017-braille-ocr/project-braille-ocr-using-python-70daf01e075b
+
+http://www.ni.com/white-paper/6470/en/
