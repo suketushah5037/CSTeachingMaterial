@@ -16,24 +16,56 @@ class State:
         self.sm = "abbbbbbbbb"
         self.selectedmovie = None
         self.list_dashes = []
+        self.movieguessed = False
+    #subroutine to make the list into a single string
+    def convert_listtostring(self, list_dashes):
+        dashes = ""
+        dashes  = dashes.join(list_dashes)
+        return dashes
+    
 class Guess(State):
     def __init__(self):
         print("Guess class init")
         self.state = GUESS
         super().__init__()
-        
+        self.movieguessed = False
+    
+    #subroutine to decide if the movie has been guessed
+    def check_movieguessed(self, list_dashes):
+        if('_  ' not in list_dashes):
+            return True
+        else: return False
+        return(list_dashes)
+
+
+
     def Execute(self):
         print("Executing Guess State")
         print(State.selectedmovie)
-        print(State.sm)
+        
         guessedletter = input("Guess a letter: ")
         #guessedletter = guessedletter
         print("Guessed letter = ", guessedletter)
         
         #find if the letter is there in the moviename
-        
+        found_index = State.selectedmovie.find(guessedletter)
 
-        
+        print("found index = ", found_index)
+        if(found_index != -1):
+            print("found the guessed letter")
+            #replace the found letter into the list of dashes, convert it into a string and display
+            #also check if game is over
+            State.list_dashes[found_index] = guessedletter + '  '
+            dashes = super().convert_listtostring(State.list_dashes)
+            print(dashes)
+            if(self.check_movieguessed(State.list_dashes)):
+                #print("game over, you guessed all letters and won")
+                self.movieguessed = True
+        else:
+            #reduce guesses if letter not found
+            #numberofguesses = numberofguesses - 1
+            #print("Started hanging {} turns left".format(numberofguesses))
+            self.movieguessed = False
         
 class Start(State):
     def __init__(self):
@@ -58,11 +90,7 @@ class Initialize(State):
             list_dashes.append("_  ")
         return list_dashes
 
-    #subroutine to make the list into a single string
-    def convert_listtostring(self, list_dashes):
-        dashes = ""
-        dashes  = dashes.join(list_dashes)
-        return dashes
+    
 
     def Execute(self):
         print("Executing Initialize State")
@@ -96,7 +124,7 @@ class Initialize(State):
         print("new list of dashes = ", State.list_dashes)
 
         #convert list to string to display to the user
-        dashes = self.convert_listtostring(State.list_dashes)
+        dashes = super().convert_listtostring(State.list_dashes)
         print("Now guess this movie")
         print(dashes)
         State.sm = "abcdef"
@@ -200,8 +228,8 @@ def main():
                 player.Start = 2
                 
             elif(player.Start == 2):
-                correctguess = False
-                if(not(correctguess)):
+                print(State.movieguessed)
+                if(not(State.movieguessed)):
                     player.FSM.Transition(FUNCGUESS)
                     player.Start = 2
                 else:
