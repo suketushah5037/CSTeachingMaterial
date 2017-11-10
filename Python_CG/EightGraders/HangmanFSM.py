@@ -1,5 +1,7 @@
 from time import clock
 import random
+import re
+
 START, INITIALIZE, GUESS = 'START', 'INITIALIZE', 'GUESS'
 FUNCSTART, FUNCINITIALIZE, FUNCGUESS = 'func_start', 'func_initialize', 'func_guess'
 
@@ -10,13 +12,14 @@ FUNCSTART, FUNCINITIALIZE, FUNCGUESS = 'func_start', 'func_initialize', 'func_gu
 State = type("State", (object,), {})
 
 class State:
-    
+    #Static
+    movieguessed = False
     def __init__(self):
         print("In super Init")
         self.sm = "abbbbbbbbb"
         self.selectedmovie = None
         self.list_dashes = []
-        self.movieguessed = False
+        
     #subroutine to make the list into a single string
     def convert_listtostring(self, list_dashes):
         dashes = ""
@@ -28,14 +31,21 @@ class Guess(State):
         print("Guess class init")
         self.state = GUESS
         super().__init__()
-        self.movieguessed = False
-    
-    #subroutine to decide if the movie has been guessed
-    def check_movieguessed(self, list_dashes):
+        
+    #callback function
+    def callbackfunc(self, list_dashes):
         if('_  ' not in list_dashes):
             return True
         else: return False
-        return(list_dashes)
+        #return(list_dashes)
+    
+    #subroutine to decide if the movie has been guessed
+    def check_movieguessed(self, callbackfunc):
+        if(callbackfunc(State.list_dashes)):
+            State.movieguessed = True
+        #else:
+         #   self.movieguessed = False
+        
 
 
 
@@ -48,19 +58,24 @@ class Guess(State):
         print("Guessed letter = ", guessedletter)
         
         #find if the letter is there in the moviename
-        found_index = State.selectedmovie.find(guessedletter)
+        #finds only the first letter
+        #found_index = State.selectedmovie.find(guessedletter)
+        #adds it in a list
+        foundlist = [found_index.start() for found_index in re.finditer(guessedletter, State.selectedmovie)]
 
-        print("found index = ", found_index)
-        if(found_index != -1):
+        #print("found index = ", found_index)
+        #if(found_index != -1):
+        if(len(foundlist) != 0):
             print("found the guessed letter")
             #replace the found letter into the list of dashes, convert it into a string and display
             #also check if game is over
-            State.list_dashes[found_index] = guessedletter + '  '
-            dashes = super().convert_listtostring(State.list_dashes)
-            print(dashes)
-            if(self.check_movieguessed(State.list_dashes)):
+            for found_index in foundlist:
+                State.list_dashes[found_index] = guessedletter + '  '
+                dashes = super().convert_listtostring(State.list_dashes)
+                print(dashes)
+            #if(self.check_movieguessed(State.list_dashes)):
+            self.check_movieguessed(self.callbackfunc)
                 #print("game over, you guessed all letters and won")
-                self.movieguessed = True
         else:
             #reduce guesses if letter not found
             #numberofguesses = numberofguesses - 1
@@ -94,8 +109,9 @@ class Initialize(State):
 
     def Execute(self):
         print("Executing Initialize State")
-
-        movielist = [ 'aa', 'aba', 'abac', 'drfe']
+        #TODO: handle spaces later
+        #TODO: movie name is too long and you want to guess all at once without hanging
+        movielist = [ 'gonewiththewind', 'diehard', 'soundofmusic', 'breakfastattiffany''s']
         #range of one less than the last item - 0 to 3
         movieitem =  random.randint(0, len(movielist)-1)
         #the movie selected
@@ -202,22 +218,24 @@ def main():
     player.FSM.states[INITIALIZE] = Initialize()
     player.FSM.states[GUESS] = Guess()
 
-
-    
-
     player.FSM.transitions[FUNCSTART] = Transitioning(player.FSM.states[START])
     player.FSM.transitions[FUNCINITIALIZE] = Transitioning(player.FSM.states[INITIALIZE])
     player.FSM.transitions[FUNCGUESS] = Transitioning(player.FSM.states[GUESS])
 
     print("\n\nSetting state to start\n\n")
     player.FSM.setState(START)
-
-    isGuessed = False
-    for numberofguesses in range(MAXGUESSES):
-        if(not(isGuessed)):
+    #one state wasted for start
+    #TODO: move this for loop to guess state
+    for numberofguesses in range(0, MAXGUESSES+ 1):
+        print("In the guess loop")
+        print(State.movieguessed)
+        print(numberofguesses)
+        if(not(State.movieguessed)):
             #Not yet guessed
             #The transition diagram implemented here
             #If the state is start
+
+            #TODO: Change the boolean to transitioning object's to state
             if(player.Start == 0):
                 player.FSM.Transition(FUNCINITIALIZE)
                 player.Start = 1
@@ -228,19 +246,24 @@ def main():
                 player.Start = 2
                 
             elif(player.Start == 2):
-                print(State.movieguessed)
-                if(not(State.movieguessed)):
-                    player.FSM.Transition(FUNCGUESS)
-                    player.Start = 2
-                else:
-                    player.FSM.Transition(FUNCSTART)
-                    player.Start = 0
+                #before transitioning how will I get some value from the instance of guessed? Have to store movieguessed in State
+                # and that too static since the state are in the transition objects
+                
+                player.FSM.Transition(FUNCGUESS)
+                player.Start = 2
+                
             #Not yet guessed - execute method for all
             player.FSM.Execute()
         else:
+            player.FSM.Transition(FUNCSTART)
+            player.Start = 0
             print("You guessed it right! HOORAY!")
             break
-    
+    #came out of the loop not because of the break but because of the guesses being over
+    if(State.movieguessed == False):
+        print("Outside the for loop - all guesses over and not guessed")
+    else:
+        print("Guessed and took the right number of moves, HURRAY!")
 if __name__ == "__main__":
     main()    
 
