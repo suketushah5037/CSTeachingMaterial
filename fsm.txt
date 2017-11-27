@@ -1,0 +1,68 @@
+parity
+10110 = 1 since 3 1's
+11011 = 0 since 4 1's
+
+properties 
+x^x = 0
+x^1 = ~x
+x^0 = x
+
+associative
+x^y ^z = x^ y^z
+ 
+commutative
+x^y = y^x
+
+toggle xor with 1 and toggle pause and play - on or off
+
+toggle
+encryption
+parity  - send an extra byte checksum that stores the parity
+error dectection - the checksum helps in error detection
+data protection -
+adding -  sum = (a^b ) carry = a&b
+full adder has a cin
+number of bit to be flipped to make A to B
+
+For the SUM (S) bit:
+
+SUM = (A XOR B) XOR Cin = (A ? B) ? Cin
+For the CARRY-OUT (Cout) bit:
+
+CARRY-OUT = A AND B OR Cin(A XOR B) = A.B + Cin(A ? B)
+
+swaps without temporary variables
+
+x^y = (~x&y) | (x & ~y)
+
+1011 ^ 1111 = 0100
+
+0100&1111 | 1011 &0000
+
+0100 | 0000 = 0100
+
+TODO:
+- convert one gate to another truth table to logic gate
+-FSM fysom code design 
+- djikstra
+-xor
+
+D3.js
+
+https://www.allaboutcircuits.com/technical-articles/implementing-a-finite-state-machine-in-vhdl/
+http://www.instructables.com/id/Arduino-Finite-State-Machine/
+http://www.jonblack.me/arduino-multitasking-using-finite-state-machines/
+
+
+http://www.mathertel.de/Arduino/FiniteStateMachine.aspx
+
+
+https://www.skorks.com/2011/09/why-developers-never-use-state-machines/
+
+
+fysom
+
+
+5,6,7 -  4 hrs
+d3.js
+articlw

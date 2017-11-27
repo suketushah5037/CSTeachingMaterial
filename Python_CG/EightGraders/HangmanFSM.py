@@ -2,6 +2,11 @@ from time import clock
 import random
 import re
 
+
+########################################################################
+###########################STATES#######################################
+########################################################################
+
 START, INITIALIZE, GUESS = 'START', 'INITIALIZE', 'GUESS'
 FUNCSTART, FUNCINITIALIZE, FUNCGUESS = 'func_start', 'func_initialize', 'func_guess'
 
@@ -14,12 +19,17 @@ State = type("State", (object,), {})
 class State:
     #Static
     movieguessed = False
-    def __init__(self):
+    #Dynamic methods that need to be called on entry/exit.
+    #callbacks are executed here
+    #dynamic_methods = ['on_enter', 'on_exit']
+    
+    def __init__(self, on_execute=None):
         print("In super Init")
         self.sm = "abbbbbbbbb"
         self.selectedmovie = None
         self.list_dashes = []
-        
+        #makes on_execute a list
+        self.on_execute = [on_execute]
     #subroutine to make the list into a single string
     def convert_listtostring(self, list_dashes):
         dashes = ""
@@ -33,26 +43,33 @@ class Guess(State):
         super().__init__()
         
     #callback function
-    def callbackfunc(self, list_dashes):
-        if('_  ' not in list_dashes):
-            return True
-        else: return False
+##    def callbackfunc(self, list_dashes):
+##        if('_  ' not in list_dashes):
+##            return True
+##        else: return False
         #return(list_dashes)
     
     #subroutine to decide if the movie has been guessed
-    def check_movieguessed(self, callbackfunc):
-        if(callbackfunc(State.list_dashes)):
-            State.movieguessed = True
+##    def check_movieguessed(self, callbackfunc):
+##        if(callbackfunc(State.list_dashes)):
+##            State.movieguessed = True
         #else:
          #   self.movieguessed = False
         
-
-
+    #callbacks
+##    def add_callback(self, trigger, func):
+##        calback_list = getattr(self, 'on_' + trigger)
+##        callback_list.append(func)
 
     def Execute(self):
         print("Executing Guess State")
         print(State.selectedmovie)
-        
+
+
+        #callbacks
+##        for handle in self.on_execute:
+##            event_data.fsm.callback(handle, event_data)
+            
         guessedletter = input("Guess a letter: ")
         #guessedletter = guessedletter
         print("Guessed letter = ", guessedletter)
@@ -147,7 +164,9 @@ class Initialize(State):
         print(State.sm)
         print("Executing Initialize State Ends here")
         
-
+########################################################################
+###########################STATES#######################################
+########################################################################
         
 class Transitioning:
     def __init__(self, toState):
@@ -218,6 +237,7 @@ def main():
     player.FSM.states[INITIALIZE] = Initialize()
     player.FSM.states[GUESS] = Guess()
 
+    
     player.FSM.transitions[FUNCSTART] = Transitioning(player.FSM.states[START])
     player.FSM.transitions[FUNCINITIALIZE] = Transitioning(player.FSM.states[INITIALIZE])
     player.FSM.transitions[FUNCGUESS] = Transitioning(player.FSM.states[GUESS])

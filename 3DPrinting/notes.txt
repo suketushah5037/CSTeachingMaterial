@@ -1,0 +1,33 @@
+dice
+spinner
+vase
+horn
+house		
+
+Dice
+Box
+
+split
+fillet corners
+when to use sweep, can it be a replacement for loft?
+tweak
+ungroup
+
+fidget - equilateral triangle to position the circles
+draw concentric circles
+connect tangents
+extrude all together
+fillet
+
+another method on youtube
+tutorial for above method too
+
+vase
+snow man
+
+vase
+horn
+
+loft selection - 
+
+

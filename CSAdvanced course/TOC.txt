@@ -1,0 +1,98 @@
+Boggle - Trie
+binary exponentiation kisses and tries
+TSP - backtracking or 8 queen problem
+Fibonacci encoding and how it is useful for compression
+
+how calculating in bits
+machine learning - bloom filter naive bayes
+2048 game
+call stack in functions and leading to recursion
+recursion and dynamic programming
+backtracking - matrix
+async programming sockets
+chat bot
+
+debugging and unit testing TDD
+arduino and web -web programming and SQL
+compilers how they use parsing keywords
+computer arch logic gate using transistors
+
+die hard problem
+url shortener
+chat bot
+multiplayer over sockets arduino
+
+
+x+5y = 40
+3x+2y= 17
+3x+5y=11
+
+die hard
+https://people.eecs.berkeley.edu/~bh/pdf/v1ch14.pdf
+
+http://home.wlu.edu/~kuehnerj/cv/mace_spring2003.pdf
+
+
+https://hackernoon.com/how-to-build-a-multiplayer-browser-game-4a793818c29b
+http://www.webondevices.com/arduino-nodejs-rc-car-driven-with-html5-gamepad-api/
+https://www.raywenderlich.com/38732/multiplayer-game-programming-for-teens-with-python
+https://hackaday.com/2014/05/28/the-lightgame-project-a-multiplayer-arduino-game/
+https://www.pubnub.com/blog/2016-05-25-howcreate-a-smart-device-with-arduino-and-node-js-using-johnny-five/
+http://rawkes.com/articles/creating-a-real-time-multiplayer-game-with-websockets-and-node.html
+
+hifopowai@hiranandanischools.edu.in
+
+BJC
+https://courses.edx.org/courses/course-v1:BerkeleyX+BJC.12x+3T2017/course/
+
+Map reduce
+http://meetrajesh.com/posts/map-reduce-in-real-life.html
+
+BITWISE
+https://snook.ca/archives/javascript/creative-use-bitwise-operators
+
+bitwise operators
+karnaugh maps and fsm
+access control lists and error codes
+n - bit bitmap
+https://snook.ca/archives/javascript/creative-use-bitwise-operators
+
+litrjar problem dynamic programming
+fsm in games and hardware
+http://www.sciencedirect.com/science/article/pii/S1026309811001805
+
+
+Search for offensive words in the files
+
+search - aho corasick
+offensivewords - machine learning and bloom filter
+
+Difference between trees and graphs
+
+
+Tree data structure (inorder preorder postorser and bst and heap) and searched on them BFS and DFS- for binary tree
+
+
+self balancing avl and red black trees
+
+
+String matching fgrep - aho corasick
+
+bloom filter will say it is there or not and search
+example of hashing and searching
+
+
+Compression technique
+1. Machine learning FP and TP
+2. call stack recursion 
+3. and DP
+4. DFS and BFS
+5. Bloom fiter and aho corasick
+6. compilers and parsers work example
+7. mazes and games backtracking
+8. debugging and unit testing
+9. staple ai technique
+10. use libraries and url shortner chat bot in python
+11. RNG algorithms
+12. multiplayer real time
+13. fsm - for that algo and K maps map reduce

@@ -1,0 +1,130 @@
+1. we need to store data in our own web service
+2. google app enine for python - cloud sdk for python
+https://cloud.google.com/sdk/docs/
+https://cloud.google.com/appengine/downloads
+
+
+
+3. run the url there
+
+projet id 
+
+dbsampleappai
+
+
+https://console.cloud.google.com/appengine/start?_ga=2.254577032.-1602995065.1508476580
+
+
+4. Build and run your "Hello, world!" app
+You will learn how to run your app using Google Cloud Shell, right in your browser. At the end you'll deploy your app to the web using the gcloud command.
+After the tutorial...
+Your app will be real and you'll be able to experiment with it after you deploy, or you can remove it and start fresh.
+
+
+Cloudshell to deploy the app
+
+TUTORIALDIR=src/dbsampleappai/python_gae_quickstart-2017-10-20-12-06
+git clone https://github.com/GoogleCloudPlatform/python-docs-samples $TUTORIALDIR
+
+cd $TUTORIALDIR/appengine/standard/hello_world
+
+change app.yaml
+
+To deploy -- gcloud app deploy app.yaml 
+
+https://dbsampleappai.appspot.com
+
+
+gcloud config list
+https://cloud.google.com/appengine/docs/flexible/python/runtime#application_startup
+
+remove these lines
+application: caramel-vine-183508
+version: 1
+
+
+target url: [https://caramel-vine-183508.appspot.com]
+
+
+You can stream logs from the command line by running:
+  $ gcloud app logs tail -s default
+To view your application in the web browser run:
+  $ gcloud app browse
+
+
+gcloud app logs tail -s default
+
+pwd = /home/gowri
+
+nginx only uses https://www.fullstackpython.com/nginx.html
+
+uwsgi command
+http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
+
+
+UWSGI WITH FLASK
+entrypoint: uwsgi --http :8080 --wsgi-file main.py --callable app
+
+GUNICORN AND DJANGO
+entrypoint: gunicorn -b :8080 caramel-vine-183508:wsgi
+
+
+-----
+pip install gunicorn -t lib/gunicorn
+
+
+https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27
+
+
+
+http://gowri-alltags-deletable.appspot.com/getvalue
+https://console.cloud.google.com/appengine?project=gowri-alltags-deletable&organizationId=777860278089&serviceId=default&duration=PT1H
+
+
+https://sites.google.com/a/wellesley.edu/wellesley-cs117-fall15/how-tos/how-to-use-and-create-specialized-web-services/creating-a-custom-tinywebdb-service
+
+https://sites.google.com/a/wellesley.edu/wellesley-cs117-fall15/how-tos/how-to-use-and-create-specialized-web-services/creating-a-custom-tinywebdb-service
+
+community.computingatschool.org.uk
+
+
+https://sites.google.com/a/wellesley.edu/wellesley-cs117-fall15/how-tos/how-to-use-and-create-specialized-web-services/creating-a-custom-tinywebdb-service
+
+https://sites.google.com/a/wellesley.edu/wellesley-cs117-fall15/how-tos/how-to-use-and-create-specialized-web-services/creating-a-custom-tinywebdb-service
+
+
+https://cloud.google.com/appengine/docs/flexible/custom-runtimes/quickstart
+
+
+https://cloud.google.com/sdk/gcloud/reference/app/deploy
+
+
+
+iles were skipped. Pass `--verbosity=info` to see which ones.
+You may also view the gcloud log file, found at
+[/tmp/tmp.zg6OohBldZ/logs/2017.10.21/18.26.10.248254.log].
+Started cloud build [ba959aca-5c6a-4c99-91db-bccd738fc619].
+To see logs in the Cloud Console: https://console.cloud.google.com/gcr/builds/ba959aca-5c6a-4c99-91db-bccd738fc619?project=caramel-vine-183508
+
+
+
+["STORED", "username", ["gow", "1234", 35]]
+
+["VALUE", "username", ["gow", "1234", 35]]
+
+["VALUE", "gowri", "\"(12345 35)\""]
+
+
+http://gowri-alltags-deletable.appspot.com/getvalue
+
+
+course - https://codelabs.developers.google.com/codelabs/cloud-compute-the-cosmos/index.html?index=../../index#4
+
+
+https://www.fiitjeehr.com/JobseekerRegistration.aspx
+
+
+https://developer.android.com/training/location/geofencing.html
+https://devpost.com/software/holla-vkgquz
+
+https://blockchain.berkeley.edu/decal/fa17/fund/
