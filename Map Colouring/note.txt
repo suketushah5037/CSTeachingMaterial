@@ -1,0 +1,6 @@
+download node.js and npm from
+https://nodejs.org/en/
+
+web deployment agent service to start wamp
+
+install npm
