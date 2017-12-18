@@ -1,0 +1,64 @@
+#back tracking
+
+#adjacency list - for a graph
+
+#neighbors
+
+#neighbors[karnataka] = TN, Andhra, kerala
+#neighbors[TN] = Andhra, karnataka and kerala
+#neighbors[Andhra] = karnataka , TN
+#neighbors[kerals] = TN, Karnataka
+#Andhram Karnataka, Kerala, TN
+graph = [
+    [0, 1, 0, 1],
+    [1, 0, 1, 1],
+    [0, 1, 0, 1],
+    [1, 1, 1, 0]
+    ]
+
+#m colors - 4 in our case m^n - 4^4
+#Red, green, blue, orange
+colors = ["red","blue","green","orange"]
+maxcolors = 4
+#so that you can compare if all colors have been assigned
+colors_state = [0]*len(graph)
+
+
+def isSafe(k,c, colors_state_local):
+    if(k == 3):
+        print("colors = ", colors_state_local)
+        print("chosen color = ", c)
+        print("len graph = ", len(graph))
+    for vertex in range(len(graph)):
+        if( (graph[vertex][k] == 1) and (c == colors_state_local[vertex])):
+            if(k==3):
+                print("returning false " + "vertex = ", vertex)
+            return False
+    #bug: return true only when the for is over - after checking all neighbors
+    if(k==3): print("returning true " + "vertex = ", vertex)
+    return True
+
+#should send local colors_state because of backtracking
+#coloring map with vertex k
+def mapcoloring(k, colors_state_local):
+    if(0 not in colors_state_local):
+        #end state for recursion
+        #all states colored
+        print(colors_state_local)
+        return True
+    for color in colors:
+        if(isSafe(k,color, colors_state_local)):
+            colors_state_local[k] = color
+            print(colors_state_local)
+            if(mapcoloring(k+1, colors_state_local)):
+                return True
+            colors_state[k] = 0
+            print("backtracking")
+            
+
+
+def main():
+    mapcoloring(0, colors_state)
+    #print(colors_state)
+    
+main()
